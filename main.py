@@ -40,3 +40,7 @@ async def process_code(request: CodeRequest):
     prompt = f"Please {request.task} this {request.language} code:\n\n{request.code}"
     response = model.generate_content(prompt)
     return {"response": response.text}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))  # Use Render's PORT or default to 8000
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)
